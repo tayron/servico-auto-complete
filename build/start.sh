@@ -14,12 +14,6 @@ fi
 
 echo
 echo "-----------------------------------------------------------"
-echo "INICIALIZANDO SERVIÇO DO CRON -----------------------------"
-echo "-----------------------------------------------------------"
-service cron stop  && service cron start
-
-echo
-echo "-----------------------------------------------------------"
 echo "SETANDO VIRTUAL HOST conexao_externa NO /etc/hosts --------"
 echo "-----------------------------------------------------------"
 netstat -nr | grep '^0\.0\.0\.0' | awk '{print $2 " conexao_externa"}' >> /etc/hosts

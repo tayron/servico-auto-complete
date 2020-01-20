@@ -2,16 +2,16 @@
 namespace Application\Controller;
 
 use Exception;
-use Application\Controller\Model\CompraModel;
+use Application\Exceptions\FalhaAoInsetirDadosException;
+use Application\Model\CompraModel;
 
-class Compra{
+class CompraController{
 
 	public function inserir()
     {
 		try {
-			global $app;
-			$dados = json_decode($app->request->getBody(), true);
-			$parametrosAPi = (sizeof($dados)==0)? $_POST : $dados;
+			global $app;			
+			$parametrosAPi = json_decode($app->request->getBody(), true);
 	
 			$compraModel = new CompraModel();
 			$compraModel->setCampo1($parametrosAPi['campo1']);
@@ -21,7 +21,13 @@ class Compra{
 			$app->render( 'default.php', [
 				"data" => ['id' => $idRegistroGerado]
 			], 200); 
-		} catc (Exception $ex) {
+			
+		} catch(FalhaAoInsetirDadosException $ex) {
+			$app->render( 'default.php', [
+				"mensagem" => $ex->getMessage()
+			], 400); 
+
+		} catch (Exception $ex) {
 			$app->render( 'default.php', [
 				"mensagem" => $ex->getMessage()
 			], 400); 

@@ -1,22 +1,43 @@
 version: '2'
 
 services:
-    php:
-        container_name: hospeda.app_php
-        restart: always
+    microservico_insercao_dados:
+        container_name: microservico_insercao_dados
         build:
             context: ./build
-            dockerfile: Dockerfile.dev
+            dockerfile: DockerfileDevel.dev
         depends_on:
-            - mysql
+            - mysql_escrita
         volumes:
-            - ./:/var/www/html
-    mysql:
+            - ./microservico_insercao_dados/:/var/www/html
+
+    microservico_autocomplete:
+        container_name: microservico_autocomplete
+        build:
+            context: ./build
+            dockerfile: DockerfileDevel.dev
+        depends_on:
+            - mysql_leitura
+        volumes:
+            - ./microservico_autocomplete/:/var/www/html
+
+    mysql_escrita:
         image: mysql:5.6
-        container_name: hospeda.app_mysql
-        restart: always
+        container_name: banco_dados_escrita
+        depends_on:
+            - mysql_leitura
         volumes:
-            - ~/mysql_docker/data_hospeda_app:/var/lib/mysql
+            - ~/mysql_docker/banco_dados_escrita:/var/lib/mysql
+            - "./build/backup-banco-dados:/database"
+        environment:
+            MYSQL_DATABASE: projeto
+            MYSQL_ROOT_PASSWORD: root
+
+    mysql_leitura:
+        image: mysql:5.6
+        container_name: banco_dados_leitura
+        volumes:
+            - ~/mysql_docker/banco_dados_leitura:/var/lib/mysql
             - "./build/backup-banco-dados:/database"
         environment:
             MYSQL_DATABASE: projeto

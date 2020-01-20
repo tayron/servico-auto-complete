@@ -7,8 +7,8 @@ $app = new \Slim\Slim(array(
     'templates.path' => 'templates'
 ));
 
-//nova pessoa
-$app->post('/compras/', function() use ($app){
+//nova compra
+$app->get('/compras/', function() use ($app){
 	(new Application\Controller\CompraController($app))->inserir();
 });
 
