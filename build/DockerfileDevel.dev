@@ -1,0 +1,101 @@
+FROM php:7.2.14-fpm-stretch
+
+MAINTAINER Tayron Miranda <contato@tayron.com.br>
+
+RUN apt-get update && apt-get install -y cron
+
+RUN apt-get install -y \
+        net-tools \
+        nginx \
+        vim \
+        git \
+    --no-install-recommends
+
+RUN docker-php-ext-install pdo_mysql 
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+    && docker-php-ext-install -j$(nproc) iconv \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
+
+
+RUN apt-get install -y \
+        libintl-perl \
+        libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
+
+RUN apt-get install -y \
+        libzip-dev \
+        unzip \
+    && docker-php-ext-configure zip --with-libzip \
+    && docker-php-ext-install zip
+
+RUN apt-get install -y \
+        libmcrypt-dev \
+    && pecl install mcrypt-1.0.2 \
+    && docker-php-ext-enable mcrypt
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+## PHP CS exemplo de utilização: php ~/phpcs.phar --standard=PSR2 src/Controller/PagesController.php 
+RUN cd ~ && curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+RUN pear install PHP_CodeSniffer
+RUN cd /var/www/html && composer global require "squizlabs/php_codesniffer=*"
+
+
+###
+# ONLY IN DEV
+###
+RUN apt-get install -y \
+        mysql-client \
+        zip \
+    --no-install-recommends
+
+RUN pecl install xdebug \
+    && echo "zend_extension=xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "display_errors = On" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.var_display_max_depth = 5" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable = On" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_handler = dbgp" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.idekey=docker" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_host=conexao_externa" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_mode=req" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_log=/var/log/projeto_docker_xdebug.log" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+###
+# END ONLY IN DEV
+###
+
+RUN apt-get purge --auto-remove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /usr/src/php*
+
+RUN usermod -u 1000 www-data
+
+# Configure nginx
+RUN rm -rf /etc/nginx/conf.d/* \
+    rm -f /etc/nginx/nginx.conf
+
+COPY ./nginx/nginx.conf /etc/nginx/
+COPY ./nginx/projeto.conf /etc/nginx/conf.d/
+
+#COPY ./crontab /etc/crontab
+#RUN crontab /etc/crontab
+
+WORKDIR /var/www/html
+
+COPY ./start.sh /scripts/start.sh
+
+RUN chmod -Rf 755 /scripts
+
+EXPOSE 80
+
+CMD ["/scripts/start.sh"]

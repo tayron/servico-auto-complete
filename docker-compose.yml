@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+    php:
+        container_name: hospeda.app_php
+        restart: always
+        build:
+            context: ./build
+            dockerfile: Dockerfile.dev
+        depends_on:
+            - mysql
+        volumes:
+            - ./:/var/www/html
+    mysql:
+        image: mysql:5.6
+        container_name: hospeda.app_mysql
+        restart: always
+        volumes:
+            - ~/mysql_docker/data_hospeda_app:/var/lib/mysql
+            - "./build/backup-banco-dados:/database"
+        environment:
+            MYSQL_DATABASE: projeto
+            MYSQL_ROOT_PASSWORD: root
