@@ -9,7 +9,7 @@ $app = new \Slim\Slim(array(
 
 //nova pessoa
 $app->post('/compras/', function() use ($app){
-	(new \controllers\Compra($app))->inserir();
+	(new Application\Controller\CompraController($app))->inserir();
 });
 
 //Rodando aplicação
