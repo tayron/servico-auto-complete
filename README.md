@@ -28,6 +28,8 @@ CONTAINER ID        IMAGE                                                 COMMAN
 21c3c72a605d        autocomplete_php_consulta                             "docker-php-entrypoi…"   4 hours ago         Up 4 hours          80/tcp, 9000/tcp                                 autocomplete_consulta_dados
 7dcc14529b46        mysql:5.6                                             "docker-entrypoint.s…"   5 hours ago         Up 4 hours          3306/tcp                                         autocomplete_banco_dados
 ```
+![Alt text](evidencias/containers.png?raw=true "Containers da stack da aplicação")
+
 
 Deve-se acessar o container do mysql 
 ```docker exec -it autocomplete_banco_dados bash```
