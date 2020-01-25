@@ -1,8 +1,6 @@
 <?php
 namespace Application\Controller;
 
-use Application\Model\ProductModel;
-use Application\Model\SaleModel;
 use Application\Model\TimeLineModel;
 use Exception;
 
@@ -16,8 +14,14 @@ class TimelineController
 			$timelineModel = new TimeLineModel();
 			$listaTimeline = $timelineModel->getTimeline();
 
+			$listaRetorno['timeline'] = [];
+
+			foreach( $listaTimeline  as $dado) {
+				array_push($listaRetorno['timeline'], $dado);
+			}
+
 			return $app->render( 'default.php', [
-				"message" => $listaTimeline
+				"message" => $listaRetorno
 			], 200);
 
 		} catch (Exception $ex) {

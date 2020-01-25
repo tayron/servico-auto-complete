@@ -20,4 +20,8 @@ $app->get('/sales/timeline', function() use ($app){
 	(new Application\Controller\TimelineController($app))->get();
 });
 
+$app->get('/sales/sincronizacao', function() use ($app){
+	(new Application\Controller\SincrionizacaoController($app))->sincronizar();
+});
+
 $app->run();
