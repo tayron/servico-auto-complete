@@ -135,6 +135,7 @@ Senha do banco de dados: root
 ```
 
 A saída deverá ser ```{"flash":{},"message":"success"}```
+Registro inserido no banco de dados
 ![Alt text](evidencias/cadastro-banco-dados.png?raw=true "Registro no banco")
 
 ### Usando api de consulta usando filtro por evento: GET http://172.22.0.4/autocomplete?event=comprou-
