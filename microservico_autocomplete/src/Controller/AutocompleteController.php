@@ -17,12 +17,13 @@ class AutocompleteController
 			$elasticsearch = new ElasticFactory('autocomplete');			
 			$elasticsearch->setType('sales');
 			$elasticsearch->setSize(100);
+
 			$matchQuery=[
-				'match'=> [
-					'event'=> $event
+				'wildcard'=> [
+					'event.keyword'=> "$event*"
 				]
 			];
-			
+
 			$matchData = $elasticsearch->find($matchQuery);
 
 			$listData = [];		

@@ -50,6 +50,15 @@ class ElasticFactory
 	//create a query
 	public function find($query)
 	{	
+		$params = [
+			'index' => $this->index,
+			'body'  => [
+				'query' => $query
+			]
+		];
+		
+		return $this->client->search($params);
+/*
 		if($this->type){
 			$params['type'] = $this->type;
 		}
@@ -58,6 +67,7 @@ class ElasticFactory
 		$params['size'] = $this->size;
 
 		return $this->client->search($params);
+*/		
 	}
 
 	public function setIndex($index)

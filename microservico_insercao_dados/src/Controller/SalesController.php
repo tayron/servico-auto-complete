@@ -42,7 +42,7 @@ class SalesController
 					$this->insertProductSale($saleId, $productName, $productPrice, $productDate);
 
 					$this->setDataToElasticsearch([
-						"event" => "comprou-produto",
+						"event" => "comprou_produto",
 						"timestamp" => $product['date'],
 						"product_price" => $productPrice,
 						"transaction_id" => $transactionId,
