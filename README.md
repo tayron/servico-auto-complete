@@ -140,6 +140,8 @@ Registro inserido no banco de dados
 ![Alt text](evidencias/cadastro-banco-dados.png?raw=true "Registro no banco")
 
 ### Usando api de consulta usando filtro por evento: GET http://172.22.0.4/autocomplete?event=comprou-
+![Alt text](evidencias/cadastro-evento-compras_2.png?raw=true "Consulta do registro")
+
 A saída deverá ser 
 ```
 {
@@ -169,9 +171,10 @@ A saída deverá ser
     ]
 }
 ```
-![Alt text](evidencias/cadastro-evento-compras_2.png?raw=true "Consulta do registro")
 
 ### Usando a API para recuperar pipeline GET http://172.22.0.5/sales/timeline
+
+![Alt text](evidencias/servico-timeline.png?raw=true "Consulta da timeline")
 
 A saída deverá ser
 ```
@@ -211,7 +214,6 @@ A saída deverá ser
     }
 }
 ```
-![Alt text](evidencias/servico-timeline.png?raw=true "Consulta da timeline")
 
 ### URL para sincronização de informações onde se consulta dados de commpra de uma outra api e cadastra localmente
 GET http://172.22.0.5/sales/sincronizacao
