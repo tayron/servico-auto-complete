@@ -2,7 +2,7 @@ FROM php:7.2.14-fpm-stretch
 
 MAINTAINER Tayron Miranda <contato@tayron.com.br>
 
-RUN apt-get update && apt-get install -y cron
+RUN apt-get update
 
 RUN apt-get install -y \
         net-tools \
@@ -58,9 +58,6 @@ RUN rm -rf /etc/nginx/conf.d/* \
 
 COPY ./nginx/nginx.conf /etc/nginx/
 COPY ./nginx/projeto.conf /etc/nginx/conf.d/
-
-COPY ./crontab /etc/crontab
-RUN crontab /etc/crontab
 
 WORKDIR /var/www/html
 

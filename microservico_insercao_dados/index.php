@@ -1,16 +1,19 @@
 <?php
-//Autoload
+
 $loader = require 'vendor/autoload.php';
 
-//Instanciando objeto
 $app = new \Slim\Slim(array(
     'templates.path' => 'templates'
 ));
 
-//nova compra
-$app->get('/compras/', function() use ($app){
-	(new Application\Controller\CompraController($app))->inserir();
+$app->any('/', function() use ($app){
+    $app->render( 'default.php', [
+        "message" => 'API ativa'
+    ], 200);	
 });
 
-//Rodando aplicação
+$app->any('/sales/', function() use ($app){
+	(new Application\Controller\SalesController($app))->insert();
+});
+
 $app->run();

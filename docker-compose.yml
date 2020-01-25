@@ -1,44 +1,34 @@
 version: '2'
 
 services:
-    microservico_insercao_dados:
-        container_name: microservico_insercao_dados
+    php_insere:
+        container_name: autocomplete_insere_dados
         build:
             context: ./build
-            dockerfile: DockerfileDevel.dev
+            dockerfile: DockerfilePHP.dev
         depends_on:
-            - mysql_escrita
+            - mysql
         volumes:
             - ./microservico_insercao_dados/:/var/www/html
 
-    microservico_autocomplete:
-        container_name: microservico_autocomplete
+    php_consulta:
+        container_name: autocomplete_consulta_dados
         build:
             context: ./build
-            dockerfile: DockerfileDevel.dev
-        depends_on:
-            - mysql_leitura
+            dockerfile: DockerfilePHP.dev
         volumes:
             - ./microservico_autocomplete/:/var/www/html
 
-    mysql_escrita:
+    mysql:
         image: mysql:5.6
-        container_name: banco_dados_escrita
-        depends_on:
-            - mysql_leitura
+        container_name: autocomplete_banco_dados
         volumes:
-            - ~/mysql_docker/banco_dados_escrita:/var/lib/mysql
+            - ~/mysql_docker/autocomplete_banco_dados:/var/lib/mysql
             - "./build/backup-banco-dados:/database"
         environment:
             MYSQL_DATABASE: projeto
             MYSQL_ROOT_PASSWORD: root
 
-    mysql_leitura:
-        image: mysql:5.6
-        container_name: banco_dados_leitura
-        volumes:
-            - ~/mysql_docker/banco_dados_leitura:/var/lib/mysql
-            - "./build/backup-banco-dados:/database"
-        environment:
-            MYSQL_DATABASE: projeto
-            MYSQL_ROOT_PASSWORD: root
+    elasticsearch:
+        image: elasticsearch:6.8.6
+        container_name: autocomplete_elasticsearch
