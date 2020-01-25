@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "5749b054-fb13-4257-a9fb-8654b752f376",
+		"name": "Autocomplete",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://172.19.0.5/sales",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"events\": [\n        {\n            \"event\": \"comprou-produto\",\n            \"timestamp\": \"2016-09-22T13:57:32.2311892-03:00\",\n            \"custom_data\": [\n                {\n                    \"key\": \"product_name\",\n                    \"value\": \"Camisa Azul\"\n                },\n                {\n                    \"key\": \"transaction_id\",\n                    \"value\": \"3029384\"\n                },\n                {\n                    \"key\": \"product_price\",\n                    \"value\": 100\n                }\n            ]\n        },\n        {\n            \"event\": \"comprou\",\n            \"timestamp\": \"2016-09-22T13:57:31.2311892-03:00\",\n            \"revenue\": 250,\n            \"custom_data\": [\n                {\n                    \"key\": \"store_name\",\n                    \"value\": \"Patio Savassi\"\n                },\n                {\n                    \"key\": \"transaction_id\",\n                    \"value\": \"3029384\"\n                }\n            ]\n        },\n        {\n            \"event\": \"comprou-produto\",\n            \"timestamp\": \"2016-09-22T13:57:33.2311892-03:00\",\n            \"custom_data\": [\n                {\n                    \"key\": \"product_price\",\n                    \"value\": 150\n                },\n                {\n                    \"key\": \"transaction_id\",\n                    \"value\": \"3029384\"\n                },\n                {\n                    \"key\": \"product_name\",\n                    \"value\": \"Calça Rosa\"\n                }\n            ]\n        },\n        {\n            \"event\": \"comprou-produto\",\n            \"timestamp\": \"2016-10-02T11:37:35.2300892-03:00\",\n            \"custom_data\": [\n                {\n                    \"key\": \"transaction_id\",\n                    \"value\": \"3409340\"\n                },\n                {\n                    \"key\": \"product_name\",\n                    \"value\": \"Tenis Preto\"\n                },\n                {\n                    \"key\": \"product_price\",\n                    \"value\": 120\n                }\n            ]\n        },\n        {\n            \"event\": \"comprou\",\n            \"timestamp\": \"2016-10-02T11:37:31.2300892-03:00\",\n            \"revenue\": 120,\n            \"custom_data\": [\n                {\n                    \"key\": \"transaction_id\",\n                    \"value\": \"3409340\"\n                },\n                {\n                    \"key\": \"store_name\",\n                    \"value\": \"BH Shopping\"\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://172.22.0.5/sales",
+					"protocol": "http",
+					"host": [
+						"172",
+						"22",
+						"0",
+						"5"
+					],
+					"path": [
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.22.0.4/autocomplete?event=comprou-",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.22.0.4/autocomplete?event=comprou-",
+					"protocol": "http",
+					"host": [
+						"172",
+						"22",
+						"0",
+						"4"
+					],
+					"path": [
+						"autocomplete"
+					],
+					"query": [
+						{
+							"key": "event",
+							"value": "comprou-"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.22.0.5/sales/timeline",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.22.0.5/sales/timeline",
+					"protocol": "http",
+					"host": [
+						"172",
+						"22",
+						"0",
+						"5"
+					],
+					"path": [
+						"sales",
+						"timeline"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.22.0.5/sales/sincronizacao",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.22.0.5/sales/sincronizacao",
+					"protocol": "http",
+					"host": [
+						"172",
+						"22",
+						"0",
+						"5"
+					],
+					"path": [
+						"sales",
+						"sincronizacao"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
