@@ -214,4 +214,7 @@ A saída deverá ser
 ```
 
 
-Para mais detalhes há um arquivo chamdao documentacao-api.json na raiz do projeto que trás mais detalhe de como fazer cada requisição;
+Para mais detalhes há um arquivo chamdao documentacao-api.json na raiz do projeto que trás mais detalhe de como fazer cada requisição. 
+
+Há um diretório chamado evidência com alguns prints dos testes realizados, como print de tabela de banco, testes realizados na api com Postman.. 
+
