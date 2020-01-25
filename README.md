@@ -41,6 +41,7 @@ Senha do banco de dados: root
 
 ## Testando aplicação
 ### Inserindo dados através da api: POST http://172.22.0.5/sales enviando os dados como json
+![Alt text](evidencias/cadastro-evento-compras.png?raw=true "Serviço cadastro de compra")
 
 ```
 {
@@ -134,6 +135,7 @@ Senha do banco de dados: root
 ```
 
 A saída deverá ser ```{"flash":{},"message":"success"}```
+![Alt text](evidencias/cadastro-banco-dados.png?raw=true "Registro no banco")
 
 ### Usando api de consulta usando filtro por evento: GET http://172.22.0.4/autocomplete?event=comprou-
 A saída deverá ser 
@@ -206,6 +208,7 @@ A saída deverá ser
     }
 }
 ```
+![Alt text](evidencias/cadastro-evento-compras_2.png?raw=true "Consulta do registro")
 
 ### URL para sincronização de informações onde se consulta dados de commpra de uma outra api e cadastra localmente
 GET http://172.22.0.5/sales/sincronizacao
