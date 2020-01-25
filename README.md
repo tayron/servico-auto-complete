@@ -38,7 +38,7 @@ Acessar diretório database
 Senha do banco de dados: root
 
 ## Testando aplicação
-###Inserindo dados através da api: POST http://172.22.0.5/sales enviando os dados como json
+### Inserindo dados através da api: POST http://172.22.0.5/sales enviando os dados como json
 
 ```
 {
@@ -133,7 +133,7 @@ Senha do banco de dados: root
 
 A saída deverá ser ```{"flash":{},"message":"success"}```
 
-###Usando api de consulta usando filtro por evento: GET http://172.22.0.4/autocomplete?event=comprou-
+### Usando api de consulta usando filtro por evento: GET http://172.22.0.4/autocomplete?event=comprou-
 A saída deverá ser 
 ```
 {
