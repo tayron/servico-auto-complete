@@ -15,8 +15,6 @@ class SalesController
 
 	public function insert()
     {
-		$this->setDataToElasticsearch();
-		
 		$saleId = null;
 
 		try {
@@ -29,6 +27,12 @@ class SalesController
 				$saleDate = new DateTime($store['date']);
 	
 				$saleId = $this->insertStoreSale($transactionId, $storeName, $revenue, $saleDate);
+
+				$this->setDataToElasticsearch([ 
+					"event" => "comprou",
+					"timestamp" => $store['date'],
+					"store_name" => $storeName
+				]);
 	
 				foreach ($store['products'] as $product) {
 					$productName = $product['name'];
@@ -36,6 +40,14 @@ class SalesController
 					$productDate = new DateTime($product['date']);
 		
 					$this->insertProductSale($saleId, $productName, $productPrice, $productDate);
+
+					$this->setDataToElasticsearch([
+						"event" => "comprou-produto",
+						"timestamp" => $product['date'],
+						"product_price" => $productPrice,
+						"transaction_id" => $transactionId,
+						"product_name" => $productName
+					]);
 				}
 			}
 			
