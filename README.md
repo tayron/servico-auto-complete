@@ -218,3 +218,6 @@ Para mais detalhes há um arquivo chamdao documentacao-api.json na raiz do proje
 
 Há um diretório chamado evidência com alguns prints dos testes realizados, como print de tabela de banco, testes realizados na api com Postman.. 
 
+## Considerações
+- Requisito de segurança como autenticação para se usar as apis não foram considerados nesta stack
+- No arquivo https://github.com/tayron/autocomplete/blob/master/microservico_insercao_dados/src/Factory/ElasticFactory.php deve-se inserir o ip do container do elasticsearch, pois ainda não foi criado arquivo de configuração
