@@ -12,8 +12,12 @@ $app->any('/', function() use ($app){
     ], 200);	
 });
 
-$app->any('/sales/', function() use ($app){
+$app->post('/sales/', function() use ($app){
 	(new Application\Controller\SalesController($app))->insert();
+});
+
+$app->get('/sales/timeline', function() use ($app){
+	(new Application\Controller\TimelineController($app))->get();
 });
 
 $app->run();

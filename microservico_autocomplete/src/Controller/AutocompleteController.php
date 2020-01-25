@@ -13,6 +13,10 @@ class AutocompleteController
 		try {
 			global $app;			
 			$event = $app->request()->get('event');			
+
+			if (strlen($event) < 2 ) {
+				return $app->render( 'default.php', ["message" => []], 200);
+			}
 			
 			$elasticsearch = new ElasticFactory('autocomplete');			
 			$elasticsearch->setType('sales');
@@ -33,13 +37,13 @@ class AutocompleteController
 				}
 			}
 			
-			$app->render( 'default.php', [
+			return $app->render( 'default.php', [
 				"message" => $listData
 			], 200);
 
 		} catch (Exception $ex) {
 
-			$app->render( 'default.php', [
+			return $app->render( 'default.php', [
 				"message" => $ex->getMessage()
 			], 400); 
 		}
