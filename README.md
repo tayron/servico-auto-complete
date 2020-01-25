@@ -167,6 +167,7 @@ A saída deverá ser
     ]
 }
 ```
+![Alt text](evidencias/cadastro-evento-compras_2.png?raw=true "Consulta do registro")
 
 ### Usando a API para recuperar pipeline GET http://172.22.0.5/sales/timeline
 
@@ -208,7 +209,7 @@ A saída deverá ser
     }
 }
 ```
-![Alt text](evidencias/cadastro-evento-compras_2.png?raw=true "Consulta do registro")
+![Alt text](evidencias/servico-timeline.png?raw=true "Consulta da timeline")
 
 ### URL para sincronização de informações onde se consulta dados de commpra de uma outra api e cadastra localmente
 GET http://172.22.0.5/sales/sincronizacao
