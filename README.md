@@ -29,7 +29,7 @@ ba6822ceb4ac        docker.elastic.co/elasticsearch/elasticsearch:6.5.4   "/usr/
 7dcc14529b46        mysql:5.6                                             "docker-entrypoint.s…"   2 days ago          Up 4 seconds        3306/tcp                 autocomplete_banco_dados
 
 ```
-![Alt text](evidencias/containers.png?raw=true "Containers da stack da aplicação")
+![Alt text](evidencias/portainer-containers.png?raw=true "Containers da stack da aplicação")
 
 
 Deve-se acessar o container do mysql 
