@@ -2,6 +2,9 @@
 
 $loader = require 'vendor/autoload.php';
 
+$dotenv = new Symfony\Component\Dotenv\Dotenv();
+$dotenv->load(__DIR__.'/.env');
+
 $app = new \Slim\Slim(array(
     'templates.path' => 'templates'
 ));

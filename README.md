@@ -12,7 +12,7 @@ Compreende os serguintes serviços:
 por ordem de compra do mais novo para o mais velho.
 - GET (http://172.22.0.5/sales/sincronizacao): /sales/sincronizacao serviço que consome api com dados das compras e repassa as informações a api (http://172.22.0.5/sales) para armazenamento dos dados, servindo como uma interface de comunicação, intermediando dois serviços destintos e que pode ser configurado em um cron para ser executado de tempos em tempos.
 
-Os serviços descritos acima rodam sobre um container PHP (autocomplete_insere_dados) que comunica com container do banco de dados MySQL (autocomplete_banco_dados) e grava os dados no serviço do Elasticsearch que se encontra no container (autocomplete_elasticsearch);
+Os serviços descritos acima rodam sobre um container PHP (autocomplete_sistema) que comunica com container do banco de dados MySQL (autocomplete_banco_dados) e grava os dados no serviço do Elasticsearch que se encontra no container (autocomplete_elasticsearch);
 
 ## Serviço para consulta usado para criação de autocomplete
 
@@ -22,11 +22,12 @@ Comprende em uma única api: http://172.22.0.4/autocomplete?event=comprou (/auto
 Deve-se startar os container docker com comentando "docker-compose up --build -d", os seguintes containers devem ser startados
 
 ```
-CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                                            NAMES
-62b287dcedd2        docker.elastic.co/elasticsearch/elasticsearch:6.5.4   "/usr/local/bin/dock…"   4 hours ago         Up 4 hours          0.0.0.0:9200->9200/tcp, 0.0.0.0:9300->9300/tcp   autocomplete_elasticsearch
-0d58b3c4ddf9        autocomplete_php_insere                               "docker-php-entrypoi…"   4 hours ago         Up 4 hours          80/tcp, 9000/tcp                                 autocomplete_insere_dados
-21c3c72a605d        autocomplete_php_consulta                             "docker-php-entrypoi…"   4 hours ago         Up 4 hours          80/tcp, 9000/tcp                                 autocomplete_consulta_dados
-7dcc14529b46        mysql:5.6                                             "docker-entrypoint.s…"   5 hours ago         Up 4 hours          3306/tcp                                         autocomplete_banco_dados
+CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+23a469569c1a        autocomplete_php_sistema                              "docker-php-entrypoi…"   3 seconds ago       Up 2 seconds        80/tcp, 9000/tcp         autocomplete_sistema
+aeea1879a440        autocomplete_php_consulta                             "docker-php-entrypoi…"   5 minutes ago       Up 3 seconds        80/tcp, 9000/tcp         autocomplete_consulta_dados
+ba6822ceb4ac        docker.elastic.co/elasticsearch/elasticsearch:6.5.4   "/usr/local/bin/dock…"   5 minutes ago       Up 3 seconds        9200/tcp, 9300/tcp       autocomplete_elasticsearch
+7dcc14529b46        mysql:5.6                                             "docker-entrypoint.s…"   2 days ago          Up 4 seconds        3306/tcp                 autocomplete_banco_dados
+
 ```
 ![Alt text](evidencias/containers.png?raw=true "Containers da stack da aplicação")
 
@@ -38,6 +39,22 @@ Acessar diretório database
 ```cd /database & mysql -u root -p projeto < script_criacao_banco.sql```
 
 Senha do banco de dados: root
+
+## Variavel de ambiente
+Nos diretórios sistema e microserviço deve-se criar um arquivo ```.env``` com ip do container do elasticsearch, exemplo:
+
+Local onde deve ser criado o arquivo .env:
+```
+microservico/.env
+microservico_autocomplete/.env
+```
+
+Conteúdo do arquivo .env:
+
+```
+ELASTICSEARCH_ADDRESS=172.22.0.3
+ELASTICSEARCH_PORT=9200
+```
 
 ## Testando aplicação
 ### Inserindo dados através da api: POST http://172.22.0.5/sales enviando os dados como json

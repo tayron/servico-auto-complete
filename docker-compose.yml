@@ -1,15 +1,15 @@
 version: '2'
 
 services:
-    php_insere:
-        container_name: autocomplete_insere_dados
+    php_sistema:
+        container_name: autocomplete_sistema
         build:
             context: ./build
             dockerfile: DockerfilePHP.dev
         depends_on:
             - mysql
         volumes:
-            - ./microservico_insercao_dados/:/var/www/html
+            - ./sistema/:/var/www/html
 
     php_consulta:
         container_name: autocomplete_consulta_dados
@@ -36,8 +36,5 @@ services:
             - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
             - "xpack.security.enabled=false"     
             - "discovery.type=single-node"  
-        ports:
-            - "9200:9200"   
-            - "9300:9300"          
         volumes:
             - ~/elasticsearch_docker/autocomplete_elasticsearch/data:/usr/share/elasticsearch/data
