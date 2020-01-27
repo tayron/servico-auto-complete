@@ -10,9 +10,9 @@ Compreende os serguintes serviços:
 -  POST (http://172.22.0.5/sales): /sales que pode ser usado para cadastrar vendas realizadas 
 -  GET (http://172.22.0.5/sales/timeline): /sales/timeline que é usado para recuperar todo histórico de vendas 
 por ordem de compra do mais novo para o mais velho.
-- GET (http://172.22.0.5/sales/sincronizacao): /sales/sincronizacao url usada para buscar dados de uma api das compras e persistir no banco de dados
+- GET (http://172.22.0.5/sales/sincronizacao): /sales/sincronizacao serviço que consome api com dados das compras e repassa as informações a api (http://172.22.0.5/sales) para armazenamento dos dados, servindo como uma interface de comunicação, intermediando dois serviços destintos e que pode ser configurado em um cron para ser executado de tempos em tempos.
 
-Os serviços descritos acima rodam sobre um container PHP (autocomplete_insere_dados) se que comunica com container do banco de dados MySQL (autocomplete_banco_dados) e grava os dados no serviço do Elasticsearch que se encontra no container (autocomplete_elasticsearch);
+Os serviços descritos acima rodam sobre um container PHP (autocomplete_insere_dados) que comunica com container do banco de dados MySQL (autocomplete_banco_dados) e grava os dados no serviço do Elasticsearch que se encontra no container (autocomplete_elasticsearch);
 
 ## Serviço para consulta usado para criação de autocomplete
 
