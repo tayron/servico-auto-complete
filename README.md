@@ -6,7 +6,7 @@ capaz de sincronizar com outra api, buscando as compras já realizadas e trazend
 
 ##  Serviço de inserção de dados
 
-Compreende em 2 apis:
+Compreende os serguintes serviços:
 -  POST (http://172.22.0.5/sales): /sales que pode ser usado para cadastrar vendas realizadas 
 -  GET (http://172.22.0.5/sales/timeline): /sales/timeline que é usado para recuperar todo histórico de vendas 
 por ordem de compra do mais novo para o mais velho.
