@@ -16,7 +16,7 @@ Os serviços descritos acima rodam sobre um container PHP (autocomplete_insere_d
 
 ## Serviço para consulta usado para criação de autocomplete
 
-Comprende em uma única api: http://172.22.0.4/autocomplete?event=comprou (/autocomplete?event=comprou) onde após a query string (event=) pode ser passar o nome do evento da compra, podendo passar apenas parte do nome como co, com ou comprou-produto.
+Comprende em uma única api: http://172.22.0.4/autocomplete?event=comprou (/autocomplete?event=comprou) onde após a query string (event=) pode ser passar o nome do evento da compra, podendo passar apenas parte do nome como co, com ou comprou-produto. O serviço só permitirá consulta de dados caso número de caracteres passados como parametros sejam maior que 1.
 
 ##  Instalação
 Deve-se startar os container docker com comentando "docker-compose up --build -d" os seguintes containers devem ser startados
