@@ -41,7 +41,7 @@ Acessar diretório database
 Senha do banco de dados: root
 
 ## Variavel de ambiente
-Nos diretórios sistema e microserviço deve-se criar um arquivo ```.env``` com ip do container do elasticsearch, exemplo:
+Nos diretórios **sistema** e **microservico_autocomplete** deve-se alerar o arquivo ```.env``` com ip do container do elasticsearch, exemplo:
 
 Local onde deve ser criado o arquivo .env:
 ```
