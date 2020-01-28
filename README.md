@@ -7,10 +7,12 @@ capaz de sincronizar com outra api, buscando as compras já realizadas e trazend
 ##  Serviço de inserção de dados
 
 Compreende os serguintes serviços:
--  POST (http://172.22.0.5/sales): /sales que pode ser usado para cadastrar vendas realizadas 
--  GET (http://172.22.0.5/sales/timeline): /sales/timeline que é usado para recuperar todo histórico de vendas 
+- GET (http://172.22.0.5/sales/sincronizacao): **/sales/sincronizacao** serviço que consome api com dados das compras e repassa as informações a api (http://172.22.0.5/sales) para armazenamento dos dados, servindo como uma interface de comunicação, intermediando dois serviços destintos e que pode ser configurado em um cron para ser executado de tempos em tempos.
+
+-  POST (http://172.22.0.5/sales): **/sales** serviço que é usado para cadastrar vendas realizadas, pode ser informado para clientes que queiram se comunicar diretamente com a api ao invés de fornecer uma api com dados da compra.
+
+-  GET (http://172.22.0.5/sales/timeline): **/sales/timeline** serviço que é usado para recuperar todo histórico de vendas 
 por ordem de compra do mais novo para o mais velho.
-- GET (http://172.22.0.5/sales/sincronizacao): /sales/sincronizacao serviço que consome api com dados das compras e repassa as informações a api (http://172.22.0.5/sales) para armazenamento dos dados, servindo como uma interface de comunicação, intermediando dois serviços destintos e que pode ser configurado em um cron para ser executado de tempos em tempos.
 
 Os serviços descritos acima rodam sobre um container PHP (autocomplete_sistema) que comunica com container do banco de dados MySQL (autocomplete_banco_dados) e grava os dados no serviço do Elasticsearch que se encontra no container (autocomplete_elasticsearch);
 
